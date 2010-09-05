@@ -1725,7 +1725,7 @@ function! fugitive#statusline(...)
   if !exists('b:git_dir')
     return ''
   endif
-  let status = ''
+  let status = fnamemodify(expand(b:git_dir), ":h:t").' '
   if s:buffer().commit() != ''
     let status .= ':' . s:buffer().commit()[0:7]
   endif
@@ -1738,7 +1738,7 @@ function! fugitive#statusline(...)
   if &statusline =~# '%[MRHWY]' && &statusline !~# '%[mrhwy]'
     return ',GIT'.status
   else
-    return '[Git'.status.']'
+    return '['.status.']'
   endif
 endfunction
 
